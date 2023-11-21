@@ -41,7 +41,6 @@ class GraphNode:
     for vertex, neighbors in adjList.items():
         print(f"{vertex}: {neighbors}")
 
-
     def adjacencyDFS(self, node, target, adjList, visit):
         """
         Depth-First Search (DFS) for adjacency list representation of a graph.
@@ -62,10 +61,13 @@ class GraphNode:
 
         count = 0
         visit.add(node)
-        for neighbor in adjList[node]:
-            count += self.adjacencyDFS(neighbor, target, adjList, visit)
-        visit.remove(node)
 
+        # Check if the node has neighbors in the adjacency list
+        if node in adjList:
+            for neighbor in adjList[node]:
+                count += self.adjacencyDFS(neighbor, target, adjList, visit)
+
+        visit.remove(node)
         return count
 
     def adjacencyBFS(self, node, target, adjList):
