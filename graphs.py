@@ -11,6 +11,35 @@ class GraphNode:
         self.val = val
         self.neighbors = []
 
+    # Define an empty adjacency list with vertices "A" and "B"
+    adjList = {"A": [], "B": []}
+
+    # Define edges to be added to the adjacency list
+    edges = [["A", "B"], ["B", "C"], ["B", "E"], ["C", "E"], ["E", "D"]]
+
+    # Create an empty adjacency list
+    adjList = {}
+
+    # Populate the adjacency list with edges
+    for src, dst in edges:
+        # If the source vertex is not in the adjacency list, add it with an empty list as its value
+        if src not in adjList:
+            adjList[src] = []
+
+        # If the destination vertex is not in the adjacency list, add it with an empty list as its value
+        if dst not in adjList:
+            adjList[dst] = []
+
+        # Add the destination vertex to the adjacency list of the source vertex
+        adjList[src].append(dst)
+
+    # Example Usage:
+
+    # Print the final adjacency list
+    print("Adjacency List:")
+    for vertex, neighbors in adjList.items():
+        print(f"{vertex}: {neighbors}")
+
     def dfs(self, grid, r, c, visit):
         """
         Perform Depth-First Search (DFS) to count the number of paths from the top-left to the bottom-right
