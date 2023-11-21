@@ -41,6 +41,64 @@ class GraphNode:
     for vertex, neighbors in adjList.items():
         print(f"{vertex}: {neighbors}")
 
+
+    def adjacencyDFS(self, node, target, adjList, visit):
+        """
+        Depth-First Search (DFS) for adjacency list representation of a graph.
+
+        Parameters:
+        - node: The current node being explored.
+        - target: The target node to search for.
+        - adjList: The adjacency list representation of the graph.
+        - visit: A set to track visited nodes.
+
+        Returns:
+        - The count of paths from the current node to the target node.
+        """
+        if node in visit:
+            return 0
+        if node == target:
+            return 1
+
+        count = 0
+        visit.add(node)
+        for neighbor in adjList[node]:
+            count += self.adjacencyDFS(neighbor, target, adjList, visit)
+        visit.remove(node)
+
+        return count
+
+    def adjacencyBFS(self, node, target, adjList):
+        """
+        Breadth-First Search (BFS) for adjacency list representation of a graph.
+
+        Parameters:
+        - node: The starting node for BFS.
+        - target: The target node to search for.
+        - adjList: The adjacency list representation of the graph.
+
+        Returns:
+        - The shortest path length from the starting node to the target node.
+        """
+        length = 0
+        visit = set()
+        visit.add(node)
+        queue = deque()
+        queue.append(node)
+
+        while queue:
+            for i in range(len(queue)):
+                curr = queue.popleft()
+                if curr == target:
+                    return length
+
+                for neighbor in adjList[curr]:
+                    if neighbor not in visit:
+                        visit.add(neighbor)
+                        queue.append(neighbor)
+            length += 1
+        return length
+
     def dfs(self, grid, r, c, visit):
         """
         Perform Depth-First Search (DFS) to count the number of paths from the top-left to the bottom-right
@@ -133,3 +191,22 @@ grid = [
 ]
 bfs_length = node.bfs(grid)
 print(f"Shortest path length using BFS: {bfs_length}")
+
+# Example Usage:
+
+# Create a graph node
+node = GraphNode(1)
+
+# Example of using adjacencyDFS
+adjList = {
+    'A': ['B'],
+    'B': ['C', 'E'],
+    'C': ['E'],
+    'E': ['D']
+}
+dfs_count = node.adjacencyDFS('A', 'C', adjList, set())
+print(f"Number of paths using adjacencyDFS: {dfs_count}")
+
+# Example of using adjacencyBFS
+bfs_length = node.adjacencyBFS('A', 'C', adjList)
+print(f"Shortest path length using adjacencyBFS: {bfs_length}")
