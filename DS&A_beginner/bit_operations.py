@@ -27,7 +27,6 @@ n = n >> 1
 1 & 1 -> 1      1 | 1 -> 1      1 ^ 1 -> 0
 """
 
-
 def countBits(n):
     """
     Count the number of set bits (1s) in the binary representation of an integer.
@@ -39,12 +38,13 @@ def countBits(n):
     - int: The count of set bits in the binary representation of n.
     """
     count = 0
+    # Iterate through each bit in the binary representation of n
     while n > 0:
+        # Check if the least significant bit is 1
         if n & 1 == 1:
-            count += 1
-        n = n >> 1
+            count += 1  # Increment the count if the bit is set
+        n = n >> 1  # Right shift to move to the next bit
     return count
-
 
 # Example Usage:
 
