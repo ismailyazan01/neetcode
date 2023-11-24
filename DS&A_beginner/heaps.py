@@ -6,7 +6,7 @@ class Heap:
         Attributes:
         - heap (list): The list used to represent the heap. The first element (index 0) is not used.
         """
-        self.heap = [0]
+        self.heap = [0]  # Initialize the heap with a dummy element at index 0
 
     def push(self, val):
         """
@@ -15,9 +15,10 @@ class Heap:
         Parameters:
         - val: The value to be added to the heap.
         """
-        self.heap.append(val)
-        i = len(self.heap) - 1
+        self.heap.append(val)  # Add the value to the end of the heap
+        i = len(self.heap) - 1  # Get the index of the newly added element
 
+        # Percolate up to maintain the heap property
         while i > 1 and self.heap[i] < self.heap[i // 2]:
             temp = self.heap[i]
             self.heap[i] = self.heap[i // 2]
@@ -36,9 +37,9 @@ class Heap:
         if len(self.heap) == 2:
             return self.heap.pop()
 
-        popped = self.heap[1]
-        self.heap[1] = self.heap.pop()
-        self.percolate(1)
+        popped = self.heap[1]  # Store the smallest value to be returned
+        self.heap[1] = self.heap.pop()  # Replace the root with the last element
+        self.percolate(1)  # Percolate down to maintain the heap property
         return popped
 
     def top(self):
@@ -49,7 +50,7 @@ class Heap:
         - The smallest value from the heap.
         """
         if len(self.heap) > 1:
-            return self.heap[1]
+            return self.heap[1]  # Return the root element
         return None
 
     def heapify(self, arr):
@@ -59,11 +60,11 @@ class Heap:
         Parameters:
         - arr (list): The array from which to build the heap.
         """
-        arr.append(arr[0])
-        self.heap = arr
-        curr = (len(self.heap) - 1) // 2
+        arr.append(arr[0])  # Add a dummy element to the array
+        self.heap = arr  # Use the array to represent the heap
+        curr = (len(self.heap) - 1) // 2  # Start from the last non-leaf node
         while curr > 0:
-            self.percolate(curr)
+            self.percolate(curr)  # Percolate down to maintain the heap property
             curr -= 1
 
     def percolate(self, i):
@@ -78,12 +79,14 @@ class Heap:
             right_child_index = i * 2 + 1
             smallest = i
 
+            # Find the smallest child
             if (
                 right_child_index < len(self.heap)
                 and self.heap[right_child_index] < self.heap[smallest]
             ):
                 smallest = right_child_index
 
+            # Swap with the smallest child if necessary
             if self.heap[left_child_index] < self.heap[smallest]:
                 temp = self.heap[i]
                 self.heap[i] = self.heap[left_child_index]

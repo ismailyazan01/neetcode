@@ -19,7 +19,7 @@ class LinkedLists:
         - head: The head of the linked list, initialized with a dummy node.
         - tail: The tail of the linked list, initially set to the dummy node.
         """
-        self.head = ListNode(-1)
+        self.head = ListNode(-1)  # Dummy node for the head of the linked list
         self.tail = self.head
 
     def insertEnd(self, val):
@@ -29,8 +29,8 @@ class LinkedLists:
         Parameters:
         - val: The value to be inserted.
         """
-        self.tail.next = ListNode(val)
-        self.tail = self.tail.next
+        self.tail.next = ListNode(val)  # Create a new node with the given value
+        self.tail = self.tail.next  # Update the tail to the new node
 
     def remove(self, index):
         """
@@ -43,12 +43,12 @@ class LinkedLists:
         curr = self.head
         while i < index and curr:
             i += 1
-            curr = curr.next
+            curr = curr.next  # Move to the node at the specified index
 
         if curr and curr.next:
             if curr.next == self.tail:
-                self.tail = curr
-            curr.next = curr.next.next
+                self.tail = curr  # Update the tail if the last node is being removed
+            curr.next = curr.next.next  # Skip the node to be removed
 
     def print(self):
         """
@@ -56,8 +56,8 @@ class LinkedLists:
         """
         curr = self.head.next
         while curr:
-            print(curr.val, " -> ", end="")
-            curr = curr.next
+            print(curr.val, " -> ", end="")  # Print the value of each node
+            curr = curr.next  # Move to the next node
         print()
 
 

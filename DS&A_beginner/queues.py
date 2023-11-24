@@ -19,7 +19,7 @@ class Queue:
         - left: The front of the queue.
         - right: The rear of the queue.
         """
-        self.left = self.right = None
+        self.left = self.right = None  # Initialize front and rear as None
 
     def enqueue(self, val):
         """
@@ -28,8 +28,11 @@ class Queue:
         Parameters:
         - val: The value to be added to the queue.
         """
-        newNode = ListNode(val)
+        newNode = ListNode(val)  # Create a new node with the given value
 
+        # If the queue is not empty, link the current rear to the new node
+        # Update the rear to the new node
+        # If the queue is empty, set both front and rear to the new node
         if self.right:
             self.right.next = newNode
             self.right = self.right.next
@@ -44,22 +47,22 @@ class Queue:
         - The value of the element removed from the front of the queue.
         """
         if not self.left:
-            return None
+            return None  # If the queue is empty, return None
 
-        val = self.left.val
-        self.left = self.left.next
+        val = self.left.val  # Get the value of the front element
+        self.left = self.left.next  # Move the front to the next element
         if not self.left:
-            self.right = None
+            self.right = None  # If the queue becomes empty, update the rear to None
         return val
 
     def print(self):
         """
         Print the elements of the queue.
         """
-        cur = self.left
+        cur = self.left  # Start from the front of the queue
         while cur:
-            print(cur.val, ' -> ', end="")
-            cur = cur.next
+            print(cur.val, ' -> ', end="")  # Print the value of the current node
+            cur = cur.next  # Move to the next node
         print()
 
 

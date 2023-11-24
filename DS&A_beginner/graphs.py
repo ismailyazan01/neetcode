@@ -1,6 +1,5 @@
 from collections import deque
 
-
 class GraphNode:
     def __init__(self, val):
         """

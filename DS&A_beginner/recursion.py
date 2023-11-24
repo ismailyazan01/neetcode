@@ -10,9 +10,9 @@ class Recursion:
         - int: The factorial of the input number.
         """
         if num <= 1:
-            return 1
+            return 1  # Base case: factorial of 0 and 1 is 1
 
-        return num * self.factorial(num - 1)
+        return num * self.factorial(num - 1)  # Recursive call: num! = num * (num - 1)!
 
     def fibonacciSequence(self, num):
         """
@@ -25,9 +25,10 @@ class Recursion:
         - int: The value of the Fibonacci sequence at the specified term.
         """
         if num <= 1:
-            return num
+            return num  # Base case: Fibonacci sequence at 0 and 1 is the term itself
 
-        return self.fibonacciSequence(num - 1) + self.fibonacciSequence(num - 2)
+        return self.fibonacciSequence(num - 1) + self.fibonacciSequence(
+            num - 2)  # Recursive call: F(n) = F(n-1) + F(n-2)
 
 
 # Example Usage:
