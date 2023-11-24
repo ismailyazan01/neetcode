@@ -63,21 +63,6 @@ class BinaryTree:
             root.left = self.insert(root.left, val)  # Recursively insert in the left subtree.
         return root  # Return the modified root.
 
-    def print_in_order(self, root):
-        """
-        Print the binary tree in in-order traversal.
-
-        Parameters:
-        - root: The root node of the binary tree.
-        """
-        if root:
-            # Traverse the left subtree
-            self.print_in_order(root.left)
-            # Print the current node's value
-            print(root.val, end=" ")
-            # Traverse the right subtree
-            self.print_in_order(root.right)
-
     def minValueNode(self, root):
         """
         Find the node with the minimum value in the binary tree.
