@@ -1,10 +1,10 @@
 class ListNode:
-    def __init__(self, val):
+    def __init__(self, val=None):
         """
         Initializes a ListNode object with a given value.
 
         Parameters:
-        - val (int): Value of the node.
+        - val (int, optional): Value of the node. Defaults to None.
 
         Returns:
         - None
@@ -116,7 +116,7 @@ nodeC = ListNode('C')
 nodeA.next = nodeB
 nodeB.next = nodeC
 
-# Create a ListNode object
+# Create a ListNode object without specifying a value (val defaults to None)
 list_node = ListNode()
 
 # Use middleOfList method
@@ -140,6 +140,14 @@ print(f"Input: {node1.val} -> {node2.val} -> {node3.val} -> {node4.val} -> \
     {node5.val} (with cycle), Result: {has_cycle_2}")
 
 print("\nCycle Start:")
-print(f"Input: {nodeA.val} -> {nodeB.val} -> {nodeC.val}, Result: {cycle_start_node_1.val}")
-print(f"Input: {node1.val} -> {node2.val} -> {node3.val} -> {node4.val} -> \
-    {node5.val} (with cycle), Result: {cycle_start_node_2.val}")
+if cycle_start_node_1 is not None:
+    print(f"Input: {nodeA.val} -> {nodeB.val} -> {nodeC.val}, Result: {cycle_start_node_1.val}")
+else:
+    print(f"Input: {nodeA.val} -> {nodeB.val} -> {nodeC.val}, Result: No cycle")
+
+if cycle_start_node_2 is not None:
+    print(f"Input: {node1.val} -> {node2.val} -> {node3.val} -> {node4.val} -> \
+        {node5.val} (with cycle), Result: {cycle_start_node_2.val}")
+else:
+    print(f"Input: {node1.val} -> {node2.val} -> {node3.val} -> {node4.val} -> \
+        {node5.val} (with cycle), Result: No cycle")
