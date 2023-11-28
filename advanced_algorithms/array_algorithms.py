@@ -139,6 +139,63 @@ def closeDuplicatesSlidingWindow(nums, k):
     # No duplicates found within 'k' distance
     return False
 
+
+def longestSubarray(nums):
+    """
+    Finds the length of the longest subarray with the same element.
+
+    Parameters:
+    - nums (list): List of integers.
+
+    Returns:
+    - int: Length of the longest subarray.
+    """
+    # Initialize variables for length and left index
+    length, L = 0, 0
+
+    # Iterate over the array
+    for R in range(len(nums)):
+        # Check if the element at L is different from the element at R
+        if nums[L] != nums[R]:
+            # If different, update the left index to the current position
+            L = R
+        # Update the maximum length considering the current subarray
+        length = max(length, R - L + 1)
+    # Return the final length of the longest subarray
+    return length
+
+
+def shortestSubarray(nums, target):
+    """
+    Finds the length of the shortest subarray whose sum is at least the target.
+
+    Parameters:
+    - nums (list): List of integers.
+    - target (int): Target sum.
+
+    Returns:
+    - int: Length of the shortest subarray.
+    """
+    # Initialize variables for left index and total sum
+    L, total = 0, 0
+    # Initialize the length to be one more than the length of the array
+    length = len(nums) + 1
+
+    # Iterate over the array
+    for R in range(len(nums)):
+        # Add the current element to the total sum
+        total += nums[R]
+        # Check if the total sum is greater than or equal to the target
+        while total >= target:
+            # Update the length to be the minimum of the current length and the new subarray length
+            length = min(R - L + 1, length)
+            # Subtract the leftmost element from the total sum and move the left index to the right
+            total -= nums[L]
+            L += 1
+    # If the length is still the initial value, no valid subarray found, return 0
+    return 0 if length == len(nums) + 1 else length
+
+
 # Example Use Cases for bruteForce and kadanes
 nums1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 nums2 = [1, 2, 3, -2, 5]
@@ -146,6 +203,12 @@ nums2 = [1, 2, 3, -2, 5]
 # Example Use Cases for closeDuplicatesBruteForce and closeDuplicatesSlidingWindow
 nums3 = [1, 2, 3, 1, 4, 5]
 nums4 = [1, 2, 3, 4, 5]
+
+# Example Use Cases for longestSubarray and shortestSubarray
+nums5 = [1, 2, 3, 2, 1]
+nums6 = [3, 2, 1, 4, 5]
+target1 = 7
+target2 = 11
 
 # Using Kadane's Algorithm
 result_kadanes_1 = kadanes(nums1)
@@ -163,6 +226,14 @@ result_bruteforce_2 = closeDuplicatesBruteForce(nums4, 3)
 result_slidingwindow_1 = closeDuplicatesSlidingWindow(nums3, 3)
 result_slidingwindow_2 = closeDuplicatesSlidingWindow(nums4, 3)
 
+# Using longestSubarray
+result_longest_1 = longestSubarray(nums1)
+result_longest_2 = longestSubarray(nums2)
+
+# Using shortestSubarray
+result_shortest_1 = shortestSubarray(nums1, target1)
+result_shortest_2 = shortestSubarray(nums2, target2)
+
 # Displaying Results
 print("Kadane's Algorithm:")
 print(f"Input: {nums1}, Result: {result_kadanes_1}")
@@ -179,3 +250,11 @@ print(f"Input: {nums4}, k: 3, Result: {result_bruteforce_2}")
 print("\nClose Duplicates - Sliding Window:")
 print(f"Input: {nums3}, k: 3, Result: {result_slidingwindow_1}")
 print(f"Input: {nums4}, k: 3, Result: {result_slidingwindow_2}")
+
+print("Longest Subarray:")
+print(f"Input: {nums1}, Result: {result_longest_1}")
+print(f"Input: {nums2}, Result: {result_longest_2}")
+
+print("\nShortest Subarray:")
+print(f"Input: {nums1}, Target: {target1}, Result: {result_shortest_1}")
+print(f"Input: {nums2}, Target: {target2}, Result: {result_shortest_2}")
