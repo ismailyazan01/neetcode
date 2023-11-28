@@ -255,6 +255,48 @@ def targetSum(nums, target):
     return []
 
 
+class PrefixSum:
+    def __init__(self, nums):
+        """
+        Initializes a PrefixSum object with a list of numbers.
+
+        Parameters:
+        - nums (list): List of integers.
+
+        Returns:
+        - None
+        """
+        # Initialize an empty list to store prefix sums
+        self.prefix = []
+        # Initialize a variable to keep track of the running total
+        total = 0
+
+        # Iterate through the input numbers
+        for n in nums:
+            # Update the running total
+            total += n
+            # Append the current prefix sum to the list
+            self.prefix.append(total)
+
+    def rangeSum(self, left, right):
+        """
+        Calculates the sum of elements in the specified range [left, right] using prefix sums.
+
+        Parameters:
+        - left (int): Left index of the range.
+        - right (int): Right index of the range.
+
+        Returns:
+        - int: Sum of elements in the specified range.
+        """
+        # Calculate the prefix sum at the right index
+        preRight = self.prefix[right]
+        # Calculate the prefix sum at the left index (or 0 if left is 0)
+        preLeft = self.prefix[left - 1] if left > 0 else 0
+        # Return the sum of elements in the specified range
+        return preRight - preLeft
+
+
 # Example Use Cases for bruteForce and kadanes
 nums1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 nums2 = [1, 2, 3, -2, 5]
@@ -274,6 +316,9 @@ word1 = "radar"
 word2 = "hello"
 nums7 = [2, 7, 11, 15]
 target3 = 9
+
+# Example Use Cases for PrefixSum
+nums8 = [1, 2, 3, 4, 5]
 
 # Using Kadane's Algorithm
 result_kadanes_1 = kadanes(nums1)
@@ -306,6 +351,13 @@ result_palindrome_2 = isPalindrome(word2)
 # Using targetSum
 result_targetsum = targetSum(nums7, target3)
 
+# Create a PrefixSum object
+prefix_sum = PrefixSum(nums8)
+
+# Calculate range sums using the rangeSum method
+result_range_sum_1 = prefix_sum.rangeSum(1, 3)
+result_range_sum_2 = prefix_sum.rangeSum(2, 4)
+
 # Displaying Results
 print("Kadane's Algorithm:")
 print(f"Input: {nums1}, Result: {result_kadanes_1}")
@@ -337,3 +389,8 @@ print(f"Input: '{word2}', Result: {result_palindrome_2}")
 
 print("\nTarget Sum:")
 print(f"Input: {nums7}, Target: {target3}, Result: {result_targetsum}")
+
+print("PrefixSum:")
+print(f"Input: {nums8}")
+print(f"Range Sum [1, 3]: {result_range_sum_1}")
+print(f"Range Sum [2, 4]: {result_range_sum_2}")
