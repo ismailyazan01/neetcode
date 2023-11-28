@@ -196,6 +196,65 @@ def shortestSubarray(nums, target):
     return 0 if length == len(nums) + 1 else length
 
 
+def isPalindrome(word):
+    """
+    Checks if a given word is a palindrome.
+
+    Parameters:
+    - word (str): Input word.
+
+    Returns:
+    - bool: True if the word is a palindrome, False otherwise.
+    """
+    # Initialize left and right pointers
+    L, R = 0, len(word) - 1
+
+    # Iterate while the left pointer is less than the right pointer
+    while L < R:
+        # Check if characters at left and right pointers are different
+        if word[L] != word[R]:
+            # If different, the word is not a palindrome
+            return False
+        else:
+            # Move the pointers towards each other
+            L += 1
+            R -= 1
+
+    # If the loop completes, the word is a palindrome
+    return True
+
+
+def targetSum(nums, target):
+    """
+    Finds indices of two numbers in a list that add up to a target sum.
+
+    Parameters:
+    - nums (list): List of integers.
+    - target (int): Target sum.
+
+    Returns:
+    - list: List containing indices of the two numbers.
+    """
+    # Initialize left and right pointers
+    L, R = 0, len(nums) - 1
+
+    # Iterate while the left pointer is less than the right pointer
+    while L < R:
+        # Check if the sum of numbers at left and right pointers is less than the target
+        if nums[L] + nums[R] < target:
+            # If less, move the left pointer to the right
+            L += 1
+        elif nums[L] + nums[R] > target:
+            # If greater, move the right pointer to the left
+            R -= 1
+        else:
+            # If equal, return the indices of the two numbers
+            return [L, R]
+
+    # If no such indices are found, return an empty list
+    return []
+
+
 # Example Use Cases for bruteForce and kadanes
 nums1 = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 nums2 = [1, 2, 3, -2, 5]
@@ -209,6 +268,12 @@ nums5 = [1, 2, 3, 2, 1]
 nums6 = [3, 2, 1, 4, 5]
 target1 = 7
 target2 = 11
+
+# Example Use Cases for isPalindrome and targetSum
+word1 = "radar"
+word2 = "hello"
+nums7 = [2, 7, 11, 15]
+target3 = 9
 
 # Using Kadane's Algorithm
 result_kadanes_1 = kadanes(nums1)
@@ -234,6 +299,13 @@ result_longest_2 = longestSubarray(nums2)
 result_shortest_1 = shortestSubarray(nums1, target1)
 result_shortest_2 = shortestSubarray(nums2, target2)
 
+# Using isPalindrome
+result_palindrome_1 = isPalindrome(word1)
+result_palindrome_2 = isPalindrome(word2)
+
+# Using targetSum
+result_targetsum = targetSum(nums7, target3)
+
 # Displaying Results
 print("Kadane's Algorithm:")
 print(f"Input: {nums1}, Result: {result_kadanes_1}")
@@ -258,3 +330,10 @@ print(f"Input: {nums2}, Result: {result_longest_2}")
 print("\nShortest Subarray:")
 print(f"Input: {nums1}, Target: {target1}, Result: {result_shortest_1}")
 print(f"Input: {nums2}, Target: {target2}, Result: {result_shortest_2}")
+
+print("Is Palindrome:")
+print(f"Input: '{word1}', Result: {result_palindrome_1}")
+print(f"Input: '{word2}', Result: {result_palindrome_2}")
+
+print("\nTarget Sum:")
+print(f"Input: {nums7}, Target: {target3}, Result: {result_targetsum}")
